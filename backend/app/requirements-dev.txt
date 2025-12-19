@@ -13,3 +13,4 @@ itsdangerous
 python-multipart
 passlib
 pydantic[email]
+bcrypt
