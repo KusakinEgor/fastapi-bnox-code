@@ -17,12 +17,12 @@ export default function Profile() {
   const days = 42;
   const today = new Date();
   const activity = Array.from({ length: days }, (_, i) => {
-    const date = new Date();
-    date.setDate(today.getDate() - (days - 1 - i));
-    return {
-      date: date.toDateString(),
-      coded: Math.random() > 0.5,
-    };
+  const date = new Date();
+  date.setDate(today.getDate() - (days - 1 - i));
+  return {
+    date: date.toDateString(),
+    coded: Math.random() > 0.5,
+  };
   });
 
   const handleMouseOver = (e: React.MouseEvent<HTMLDivElement>, text: string) => {
@@ -60,7 +60,6 @@ export default function Profile() {
           position: "relative",
         }}
       >
-        {/* Аватар */}
         <div
           style={{
             width: "120px",
@@ -77,7 +76,6 @@ export default function Profile() {
           <User size={60} color="white" />
         </div>
 
-        {/* Имя пользователя */}
         <h2
           style={{
             margin: 0,
@@ -92,7 +90,6 @@ export default function Profile() {
           {user ? user.name : "Загрузка..."}
         </h2>
 
-        {/* Кнопка редактирования */}
         <button
           style={{
             marginTop: "8px",
@@ -115,12 +112,10 @@ export default function Profile() {
           Edit Profile
         </button>
 
-        {/* Email пользователя */}
         <p style={{ color: "#9ca3af", margin: "4px 0 0" }}>
           {user ? user.email : "Загрузка..."}
         </p>
 
-        {/* Активность */}
         <div
           style={{
             display: "grid",
@@ -148,7 +143,6 @@ export default function Profile() {
           ))}
         </div>
 
-        {/* Tooltip */}
         {tooltip && (
           <div
             style={{
