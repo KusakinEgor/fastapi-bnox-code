@@ -13,4 +13,4 @@ itsdangerous
 python-multipart
 passlib
 pydantic[email]
-bcrypt
+argon2-cffi
