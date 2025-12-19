@@ -35,9 +35,14 @@ export const registerUser = async (email: string, username: string, password: st
 export const loginUser = async (email: string, password: string) => {
   try {
     const res = await axios.post(`${API_URL}/auth/login`, { email, password });
+
+    if (res.data?.access_token) {
+        localStorage.setItem("access_token", res.data.access_token);
+    }
+
     return res.data;
   } catch (err: any) {
-    if (err.response) return { error: err.response.data.detail };
+    if (err.response?.data?.detail) return { error: err.response.data.detail };
     return { error: "Server error" };
   }
 };
@@ -54,10 +59,19 @@ export const sendMessageToAI = async (message: string) => {
 
 export const getCurrentUser = async () => {
     try {
-      const res = await axios.get(`${API_URL}/users/current`, { withCredentials: true });
-      return res.data;
+        const token = localStorage.getItem("access_token");
+
+        if (!token) return { error: "No token found" };
+
+        const res = await axios.get(`${API_URL}/users/current`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        return res.data;
     } catch (err: any) {
-      if (err.response) return { error: err.response.data.detail };
+      if (err.response?.data?.detail) return { error: err.response.data.detail };
       return { error: "Server error" };
     }
 };
