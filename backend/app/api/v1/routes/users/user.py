@@ -35,12 +35,13 @@ async def update_my_profile(
     return current_user
 
 @router.get("/current")
-async def get_current_user_profile(db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(User))
-    user = result.scalars().first()
-    if not user:
-        return {"error": "No users in DB"}
-    return {"name": user.username, "email": user.email}
+async def get_current_user_profile(
+    current_user: User = Depends(get_current_user)
+):
+    return {
+        "name": current_user.username,
+        "email": current_user.email,
+    }
 
 @router.get("/{user_id}", response_model=UserOut)
 async def get_user_by_id(
