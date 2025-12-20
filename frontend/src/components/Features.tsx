@@ -51,7 +51,6 @@ export default function Features() {
         padding: "0 20px", // горизонтальные отступы
       }}
     >
-      {/* Анимированные фоновые круги */}
       <motion.div
         animate={{ x: [0, 15, 0], y: [0, 15, 0] }}
         transition={{ duration: 8, repeat: Infinity, repeatType: "mirror" }}
@@ -81,7 +80,6 @@ export default function Features() {
         }}
       />
 
-      {/* Заголовок */}
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
@@ -97,7 +95,6 @@ export default function Features() {
         </p>
       </motion.div>
 
-      {/* Карточки */}
       <div
         style={{
           display: "grid",

@@ -36,7 +36,6 @@ export default function Header() {
           alignItems: "center",
         }}
       >
-        {/* Лого */}
         <h1
           style={{
             fontSize: "20px",
@@ -59,7 +58,6 @@ export default function Header() {
           Bnox<span style={{ color: "#3b82f6" }}>Code</span>
         </h1>
 
-        {/* Навигация для десктопа */}
         <nav
           style={{
             display: "flex",
@@ -90,7 +88,6 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Кнопка Sign in */}
         <button
           onClick={() => navigate("/auth")}
           style={{
@@ -116,7 +113,6 @@ export default function Header() {
           Sign in
         </button>
 
-        {/* Гамбургер-меню для мобилок */}
         <button
           onClick={toggleMenu}
           style={{
@@ -125,7 +121,7 @@ export default function Header() {
             color: "white",
             fontSize: "20px",
             cursor: "pointer",
-            display: "none", // покажем через медиазапрос
+            display: "none", 
           }}
           className="mobile-menu-btn"
         >
@@ -133,7 +129,6 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Мобильное меню */}
       {menuOpen && (
         <div
           style={{
@@ -183,7 +178,6 @@ export default function Header() {
         </div>
       )}
 
-      {/* Медиазапросы через стили */}
       <style>
         {`
           @media (max-width: 768px) {

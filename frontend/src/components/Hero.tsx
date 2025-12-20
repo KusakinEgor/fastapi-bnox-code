@@ -25,7 +25,6 @@ export default function Hero() {
         overflow: "hidden",
       }}
     >
-      {/* Фон-плашка */}
       <div
         style={{
           position: "absolute",

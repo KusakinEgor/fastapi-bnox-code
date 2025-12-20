@@ -27,12 +27,10 @@ export default function Footer() {
           flexWrap: "wrap",
         }}
       >
-        {/* Copy */}
         <p style={{ fontSize: "14px", marginBottom: "10px" }}>
           &copy; {new Date().getFullYear()} <strong>Bnox-Code</strong>. All rights reserved.
         </p>
 
-        {/* Links */}
         <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", marginBottom: "10px" }}>
           {["About", "Contact"].map((link, i) => (
             <motion.a
@@ -46,7 +44,6 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Social Icons */}
         <div style={{ display: "flex", gap: "20px" }}>
           {socialLinks.map((social, i) => (
             <motion.a

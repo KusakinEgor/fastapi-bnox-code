@@ -4,7 +4,7 @@ import { getCurrentUser } from "../api/api";
 
 interface ActivityDay {
   date: Date;
-  coded: number; // кол-во строк / интенсивность
+  coded: number; 
 }
 
 interface ProgramRun {
@@ -35,7 +35,7 @@ const Profile: React.FC = () => {
     const days: ActivityDay[] = Array.from({ length: 42 }, (_, i) => {
       const date = new Date();
       date.setDate(today.getDate() - (41 - i));
-      return { date, coded: Math.floor(Math.random() * 50) }; // интенсивность кодинга
+      return { date, coded: Math.floor(Math.random() * 50) }; 
     });
     setActivity(days);
 
@@ -51,7 +51,6 @@ const Profile: React.FC = () => {
   };
   const handleMouseOut = () => setTooltip(null);
 
-  // Градация цвета по интенсивности
   const getColor = (coded: number) => {
     if (coded === 0) return "#2a2c36";
     if (coded < 10) return "#3b82f6";
@@ -82,7 +81,6 @@ const Profile: React.FC = () => {
       </h1>
 
       <div style={{ display: "flex", gap: "40px", flexWrap: "wrap", justifyContent: "center", width: "100%", maxWidth: "1000px" }}>
-        {/* Левая колонка */}
         <div
           style={{
             minWidth: "320px",
@@ -138,7 +136,6 @@ const Profile: React.FC = () => {
           </div>
         </div>
 
-        {/* Правая колонка */}
         <div
           style={{
             minWidth: "420px",
@@ -172,7 +169,6 @@ const Profile: React.FC = () => {
             ))}
           </div>
 
-          {/* Последние выполнения */}
           <div style={{ marginTop: "20px" }}>
             <h3 style={{ fontSize: "20px", marginBottom: "10px" }}>Последние выполнения</h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -203,7 +199,6 @@ const Profile: React.FC = () => {
         </div>
       </div>
 
-      {/* Tooltip */}
       {tooltip && (
         <div
           style={{

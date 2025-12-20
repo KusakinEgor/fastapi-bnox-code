@@ -74,9 +74,7 @@ export default function IDE() {
         gap: "20px",
       }}
     >
-      {/* Левая панель: IDE */}
       <div style={{ flex: 2, display: "flex", flexDirection: "column", gap: "20px" }}>
-        {/* Верхняя панель */}
         <div
           style={{
             display: "flex",
@@ -106,7 +104,6 @@ export default function IDE() {
             </p>
           </div>
 
-          {/* Правая часть панели */}
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <button
               onClick={runCode}
@@ -131,7 +128,6 @@ export default function IDE() {
               Run
             </button>
 
-            {/* Иконка профиля */}
             <div
               onClick={() => (window.location.href = "/profile")}
               style={{
@@ -159,7 +155,6 @@ export default function IDE() {
           </div>
         </div>
 
-        {/* Вкладки */}
         <div style={{ display: "flex", marginBottom: "10px", gap: "10px" }}>
           {["js", "python"].map((t) => (
             <div
@@ -181,7 +176,6 @@ export default function IDE() {
           ))}
         </div>
 
-        {/* Редактор */}
         <div
           style={{
             borderRadius: "12px",
@@ -200,7 +194,6 @@ export default function IDE() {
           />
         </div>
 
-        {/* Output */}
         <div
           style={{
             marginTop: "20px",
@@ -217,7 +210,6 @@ export default function IDE() {
         </div>
       </div>
 
-      {/* Правая панель: AI-ассистент */}
       <div
         style={{
           flex: 1,
@@ -293,7 +285,6 @@ export default function IDE() {
         </div>
       </div>
 
-      {/* Glow animation */}
       <style>{`
         @keyframes glow {
           0% { text-shadow: 0 0 5px #2563eb, 0 0 10px #3b82f6; }

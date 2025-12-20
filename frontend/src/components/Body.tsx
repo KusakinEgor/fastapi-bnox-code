@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 
 export default function Body() {
   useEffect(() => {
-    // Устанавливаем фон для body и html
     document.body.style.background = "linear-gradient(120deg, #0f111a, #1a1d29)";
     document.body.style.margin = "0";
     document.body.style.minHeight = "100vh";
@@ -29,7 +28,6 @@ export default function Body() {
       }}
     >
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        {/* Why Choose */}
         <h2 style={{ fontSize: "42px", fontWeight: "bold", marginBottom: "50px" }}>
           Why Choose Our Platform?
         </h2>
@@ -75,7 +73,6 @@ export default function Body() {
           ))}
         </div>
 
-        {/* How It Works */}
         <div style={{ marginTop: "120px" }}>
           <h2 style={{ fontSize: "36px", fontWeight: "bold", marginBottom: "40px" }}>How It Works</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "25px" }}>
@@ -120,7 +117,6 @@ export default function Body() {
           </div>
         </div>
 
-        {/* Supported Languages */}
         <div style={{ marginTop: "120px", marginBottom: "60px" }}>
           <h2 style={{ fontSize: "36px", fontWeight: "bold", marginBottom: "40px" }}>Supported Languages</h2>
           <div style={{ display: "flex", justifyContent: "center", gap: "40px", flexWrap: "wrap" }}>
