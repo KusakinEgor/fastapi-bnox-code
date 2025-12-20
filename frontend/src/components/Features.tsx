@@ -42,13 +42,13 @@ export default function Features() {
         position: "relative",
         backgroundColor: "#0f1117",
         color: "white",
-        height: "100vh", // <-- обязательно
+        height: "100vh",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center", // центр по вертикали
+        justifyContent: "center",
         alignItems: "center",
         overflow: "hidden",
-        padding: "0 20px", // горизонтальные отступы
+        padding: "0 20px", 
       }}
     >
       <motion.div
