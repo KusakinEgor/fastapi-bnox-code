@@ -75,7 +75,6 @@ export default function IDE() {
 
   return (
     <div style={styles.root}>
-      {/* Left side: Editor + Terminal */}
       <div style={styles.left}>
         <div style={styles.header}>
           <div>
@@ -111,7 +110,6 @@ export default function IDE() {
           ))}
         </div>
 
-        {/* Editor */}
         <div style={styles.editorWrapper}>
           <div style={styles.editorContainer}>
             <CodeMirror
@@ -126,13 +124,11 @@ export default function IDE() {
           </div>
         </div>
 
-        {/* Terminal */}
         <div style={styles.terminal}>
           {terminal.map((line, i) => <div key={i}>{line}</div>)}
         </div>
       </div>
 
-      {/* Right side: AI assistant */}
       <div style={styles.ai}>
         <div style={styles.aiHeader}>AI Assistant</div>
         <div style={styles.aiMessages}>
