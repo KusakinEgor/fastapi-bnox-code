@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { FaRocket, FaLock, FaCheckCircle, FaKeyboard, FaPlay, FaShareAlt } from "react-icons/fa";
 import { SiPython, SiJavascript } from "react-icons/si";
 import { motion } from "framer-motion";
