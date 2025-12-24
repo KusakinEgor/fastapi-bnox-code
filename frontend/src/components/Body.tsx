@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { FaRocket, FaLock, FaCheckCircle, FaKeyboard, FaPlay, FaShareAlt } from "react-icons/fa";
 import { SiPython, SiJavascript } from "react-icons/si";
 import { motion } from "framer-motion";
+import { easeOut } from "framer-motion";
 
 export default function Body() {
   useEffect(() => {
@@ -15,7 +16,7 @@ export default function Body() {
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: i * 0.15, duration: 0.5, ease: "easeOut" },
+      transition: { delay: i * 0.15, duration: 0.5, ease: easeOut },
     }),
   };
 
