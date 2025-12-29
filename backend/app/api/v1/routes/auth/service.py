@@ -18,7 +18,7 @@ async def register_user(user_data: UserCreate, db: AsyncSession):
         username=user_data.username,
         email=user_data.email,
         avatar_url=None,
-        auth_provider=AuthProvider.local,
+        auth_provider=AuthProvider.LOCAL,
         oauth_id=None,
         created_at=datetime.utcnow(),
         last_login=None,
