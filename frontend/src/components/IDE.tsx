@@ -161,7 +161,7 @@ export default function IDE() {
 }
 
 const styles: Record<string, React.CSSProperties> = {
-  root: { display: "flex", height: "100vh", gap: 14, padding: 14, fontFamily: "ui-monospace, SFMono-Regular, monospace", background: "#0f1117", color: "white" },
+  root: { display: "flex", height: "100vh", overflow: "hidden", gap: 14, padding: 14, fontFamily: "ui-monospace, SFMono-Regular, monospace", background: "#0f1117", color: "white" },
 
   left: { 
     flex: 2, 
