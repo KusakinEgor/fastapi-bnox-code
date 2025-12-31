@@ -164,7 +164,7 @@
 </p>
 
 <p align="center">
-  <img src="pictures/features.PNG" width="800" style="border: 4px solid white; border-radius: 8px;"/>
+  <img src="pictures/features1.PNG" width="800" style="border: 4px solid white; border-radius: 8px;"/>
   <br><em>Раздел «Функциональность» — демонстрация всех ключевых возможностей веб-IDE и AI-ассистента</em>
 </p>
 
