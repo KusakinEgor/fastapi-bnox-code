@@ -38,4 +38,4 @@ app.include_router(contact_router)
 
 @app.get("/")
 async def root():
-    return {"message": "work"}
+    return {"Hello": "World"}
