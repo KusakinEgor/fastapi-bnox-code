@@ -1,11 +1,11 @@
-import React from "react";
 import { FaLaptopCode, FaRobot, FaUsers } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { easeOut } from "framer-motion";
 
 interface Feature {
   title: string;
   desc: string;
-  icon: JSX.Element;
+  icon: React.JSX.Element;
 }
 
 export default function Features() {
@@ -32,7 +32,7 @@ export default function Features() {
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: i * 0.15, duration: 0.5, ease: "easeOut" },
+      transition: { delay: i * 0.15, duration: 0.5, ease: easeOut },
     }),
   };
 

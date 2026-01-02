@@ -107,8 +107,8 @@ export default function Contact() {
             color: "white",
             transition: "background 0.3s ease",
           }}
-          onMouseOver={(e) => (e.target.style.backgroundColor = "#1e40af")}
-          onMouseOut={(e) => (e.target.style.backgroundColor = "#2563eb")}
+          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#1e40af")}
+          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#2563eb")}
         >
           Send
         </button>

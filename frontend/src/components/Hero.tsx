@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function Hero() {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -72,8 +72,8 @@ export default function Hero() {
             cursor: "pointer",
             transition: "all 0.3s ease",
           }}
-          onMouseOver={(e) => (e.target.style.backgroundColor = "#1e40af")}
-          onMouseOut={(e) => (e.target.style.backgroundColor = "#2563eb")}
+          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#1e40af")}
+          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#2563eb")}
         >
           Get Started
         </button>
