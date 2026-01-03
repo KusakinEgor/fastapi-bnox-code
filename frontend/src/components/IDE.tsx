@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { Highlight, themes } from "prism-react-renderer";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { python } from "@codemirror/lang-python";
@@ -17,6 +20,70 @@ const LANGS = {
 } as const;
 
 type LangKey = keyof typeof LANGS;
+
+export function AIMarkdown({ content }: { content: string }) {
+  const CodeRenderer: React.FC<{
+    inline?: boolean;
+    className?: string;
+    children?: React.ReactNode;
+  }> = ({ inline, className, children, ...props }) => {
+    const code = String(children || "");
+    const languageMatch = /language-(\w+)/.exec(className || "");
+
+    if (inline || !languageMatch) {
+      return (
+        <code
+          style={{
+            background: "#020617",
+            padding: "2px 6px",
+            borderRadius: 6,
+            fontSize: 12,
+            border: "1px solid #1e293b",
+          }}
+          {...props}
+        >
+          {code}
+        </code>
+      );
+    }
+
+    const language = languageMatch[1];
+
+    return (
+      <Highlight theme={themes.oneDark} code={code} language={language as any}>
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          <pre
+            className={className}
+            style={{
+              ...style,
+              background: "#020617",
+              padding: 14,
+              borderRadius: 12,
+              overflowX: "auto",
+              fontSize: 12,
+              border: "1px solid #1e293b",
+              marginTop: 8,
+            }}
+          >
+            {tokens.map((line, i) => (
+              <div key={i} {...getLineProps({ line })}>
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({ token })} />
+                ))}
+              </div>
+            ))}
+          </pre>
+        )}
+      </Highlight>
+    );
+  };
+
+  return (
+    <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ code: CodeRenderer }}>
+      {content}
+    </ReactMarkdown>
+  );
+}
 
 export default function IDE() {
   const [lang, setLang] = useState<LangKey>("js");
@@ -141,7 +208,11 @@ export default function IDE() {
                 background: m.role === "user" ? "linear-gradient(135deg,#2563eb,#1d4ed8)" : "#0b1220",
               }}
             >
-              {m.text}
+                {m.role === "assistant" ? (
+                    <AIMarkdown content={m.text} />
+                ) : (
+                    m.text
+                )} 
             </div>
           ))}
         </div>
