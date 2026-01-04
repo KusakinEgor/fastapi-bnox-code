@@ -1,56 +1,92 @@
-import requests
+import time
 import uuid
 import base64
+import requests
+from typing import Optional
 
 from app.api.config import GIGA_CLIENT_ID, GIGA_CLIENT_SECRET
 
-ACCESS_TOKEN = None
 
-auth_str = f"{GIGA_CLIENT_ID}:{GIGA_CLIENT_SECRET}"
-b64_auth = base64.b64encode(auth_str.encode()).decode()
+class GigaChatClient:
+    AUTH_URL = "https://ngw.devices.sberbank.ru:9443/api/v2/oauth"
+    CHAT_URL = "https://gigachat.devices.sberbank.ru/api/v1/chat/completions"
 
-def get_token():
-    global ACCESS_TOKEN
+    def __init__(self) -> None:
+        self._session = requests.Session()
+        self._access_token: Optional[str] = None
+        self._expires_at: float = 0.0
 
-    url = "https://ngw.devices.sberbank.ru:9443/api/v2/oauth"
-    headers = {
-        "Authorization": f"Basic {b64_auth}",
-        "RqUID": str(uuid.uuid4()),
-        "Content-Type": "application/x-www-form-urlencoded",
-    }
-    data = {"scope": "GIGACHAT_API_PERS"}
+        auth_str = f"{GIGA_CLIENT_ID}:{GIGA_CLIENT_SECRET}"
+        self._basic_auth = base64.b64encode(auth_str.encode()).decode()
 
-    answer = requests.post(url, headers=headers, data=data, verify=False)
-    answer.raise_for_status()
-
-    ACCESS_TOKEN = answer.json()["access_token"]
-    return ACCESS_TOKEN
-
-def send_message_to_gigachat(message: str):
-    global ACCESS_TOKEN
-
-    if not ACCESS_TOKEN:
-        ACCESS_TOKEN = get_token()
     
-    url = "https://gigachat.devices.sberbank.ru/api/v1/chat/completions"
-    headers = {
-        "Authorization": f"Bearer {ACCESS_TOKEN}",
-        "Content-Type": "application/json",
-    }
-    data = {
-        "model": "GigaChat",
-        "messages": [{
-            "role": "user",
-            "content": message
-        }]
-    }
+    def _token_is_valid(self) -> bool:
+        # upd. for 60 sec until expire
+        return self._access_token is not None and time.time() < self._expires_at - 60
+    
+    def _get_token(self) -> str:
+        headers = {
+            "Authorization": f"Basic {self._basic_auth}",
+            "RqUID": str(uuid.uuid4()),
+            "Content-Type": "application/x-www-form-urlencoded",
+        }
+        data = {"scope": "GIGACHAT_API_PERS"}
 
-    answer = requests.post(url, headers=headers, json=data, verify=False)
+        response = self._session.post(
+            self.AUTH_URL,
+            headers=headers,
+            data=data,
+            timeout=10,
+            verify=False,
+        )
+        response.raise_for_status()
 
-    if answer.status_code == 401:
-        ACCESS_TOKEN = get_token()
-        headers["Authorization"] = f"Bearer {ACCESS_TOKEN}"
-        answer = requests.post(url, headers=headers, json=data, verify=False)
+        payload = response.json()
+        self._access_token = payload["access_token"]
+        self._expires_at = time.time() + payload.get("expires_in", 0)
 
-    answer.raise_for_status()
-    return answer.json()
+        return self._access_token
+    
+    def _ensure_token(self) -> str:
+        if not self._token_is_valid():
+            return self._get_token()
+        return self._access_token
+
+
+    # API
+
+    def send_message(self, message: str) -> dict:
+        token = self._ensure_token()
+
+        headers = {
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json",
+        }
+        payload = {
+            "model": "GigaChat",
+            "messages": [
+                {"role": "user", "content": message}
+            ],
+        }
+
+        response = self._session.post(
+            self.CHAT_URL,
+            headers=headers,
+            json=payload,
+            timeout=30,
+            verify=False,
+        )
+
+        if response.status_code == 401:
+            token = self._get_token()
+            headers["Authorization"] = f"Bearer {token}"
+            response = self._session.post(
+                self.CHAT_URL,
+                headers=headers,
+                json=payload,
+                timeout=30,
+                verify=True,
+            )
+        
+        response.raise_for_status()
+        return response.json()
