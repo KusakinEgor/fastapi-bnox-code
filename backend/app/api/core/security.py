@@ -1,3 +1,11 @@
+"""
+Security utilities for the server application.
+
+Includes:
+- Password hashing and verification
+- JWT token creation and decoding
+"""
+
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from datetime import datetime, timedelta
