@@ -14,8 +14,8 @@
 </div>
 
 <p align="center">
-  <em>BnoxCode — это веб-сервис, где можно писать и запускать код на <b>JavaScript</b> и <b>Python</b> прямо в браузере,<br />
-  а также получать помощь от встроенного <b>AI-ассистента</b>.</em>
+  <em>BnoxCode — that web-service, where you can write and start code on <b>JavaScript</b> and <b>Python</b> into browser,<br />
+  and also get help from the built-in <b>AI-assistant</b>.</em>
 </p>
 
 ## Содержание
